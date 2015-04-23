@@ -33,3 +33,4 @@
 *.dep
 JLinkLog.txt
 examples/adc/arm/build
+examples/echo/arm/build
