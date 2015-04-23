@@ -180,10 +180,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>42</ColumnNumber>
+      <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>3</TopLine>
-      <CurrentLine>17</CurrentLine>
+      <CurrentLine>29</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\user.c</PathWithFileName>
       <FilenameWithoutPath>user.c</FilenameWithoutPath>

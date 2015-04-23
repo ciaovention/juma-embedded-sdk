@@ -1,10 +1,9 @@
 #include "juma_sdk_api.h"
 
 
-
 void on_load()
 {
-	set_device_name("Template");	
+  set_device_name("Template");	
 }
 
 
