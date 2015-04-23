@@ -30,3 +30,7 @@
 
 # Debug files
 *.dSYM/
+*.bak
+*.dep
+JLinkLog.txt
+examples/adc/arm/build
