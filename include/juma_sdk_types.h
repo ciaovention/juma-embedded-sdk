@@ -43,6 +43,11 @@ enum {
     UART_8N1 = 1,
 };
 
+enum {
+    BLE_DEVICE_NORMAL,
+    BLE_DEVICE_LINK_LOST,
+};
+
 typedef struct _uart_config_t {
     uint32_t speed;
     uint8_t  mode;

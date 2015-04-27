@@ -3,7 +3,7 @@
 
 void on_load()
 {
-  set_device_name("Template");	
+  ble_device_set_name("Template");	
 }
 
 

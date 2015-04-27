@@ -8,7 +8,7 @@ void led_off_task(void* args);
 
 void on_load()
 {
-  set_device_name("Blink");	
+  ble_device_set_name("Blink");	
 }
 
 void on_ready()

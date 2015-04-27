@@ -33,3 +33,5 @@
 JLinkLog.txt
 examples/adc/arm/build
 examples/echo/arm/build
+examples/blink/arm/Build
+examples/Template/arm/Build

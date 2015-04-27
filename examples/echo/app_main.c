@@ -22,7 +22,7 @@ void led_off_task(void* args);
 
 void on_load()
 {
-    set_device_name("ECHO DEMO");
+    ble_device_set_name("ECHO DEMO");
 }
 
 void on_ready()
@@ -48,7 +48,7 @@ void led_off_task(void* args)
     run_after_delay(led_on_task, NULL, 750);
 }
 
-void on_message_from_phone(uint8_t message_type, uint8_t* data, uint32_t size)
+void ble_device_on_message(uint8_t* data, uint32_t size)
 {
-    send_to_phone(message_type, data, size);
+    ble_device_send(data, size);
 }

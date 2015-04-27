@@ -25,7 +25,7 @@ void adc_task(void* args);
 
 void on_load()
 {
-    set_device_name("ADC DEMO");
+    ble_device_set_name("ADC DEMO");
 }
 
 void on_ready()
@@ -55,7 +55,7 @@ void led_off_task(void* args)
 
 void on_adc_complete(void* args)
 {
-    send_to_phone(0, args, 2);
+    ble_device_send(args, 2);
 }
 
 void adc_task(void* args)
