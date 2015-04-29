@@ -17,7 +17,7 @@
 #define LED_1 18
 #define LED_2 19
 
-#define ADC_PIN 4
+#define ADC_PIN 8
 
 void led_on_task(void* args);
 void led_off_task(void* args);
