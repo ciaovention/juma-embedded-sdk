@@ -60,4 +60,8 @@ typedef struct _light_config_t {
     uint8_t pins[4]; // pins for RGBW
 } light_config_t;
 
+typedef struct _adc_result_t {
+    uint16_t value;
+} adc_result_t;
+
 #endif //_PSM_TYPES_H_

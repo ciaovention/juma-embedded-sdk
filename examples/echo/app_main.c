@@ -22,12 +22,12 @@ void led_off_task(void* args);
 
 void on_load()
 {
-    ble_device_set_name("ECHO DEMO");
+    ble_device_set_name("Anjun");
 }
 
 void on_ready()
 {
-    set_gpio_pin_mode(LED_1, GPIO_OUTPUT);
+    gpio_setup(LED_1, GPIO_OUTPUT);
 
     run_after_delay(led_on_task, NULL, 100);
 }
@@ -35,7 +35,7 @@ void on_ready()
 void led_on_task(void* args)
 {
     // Pull Up
-    set_gpio_pin_state(LED_1, 1);
+    gpio_write(LED_1, 1);
 
     run_after_delay(led_off_task, NULL, 250);
 }
@@ -43,7 +43,7 @@ void led_on_task(void* args)
 void led_off_task(void* args)
 {
     // Pull Down
-    set_gpio_pin_state(LED_1, 0);
+    gpio_write(LED_1, 0);
 
     run_after_delay(led_on_task, NULL, 750);
 }

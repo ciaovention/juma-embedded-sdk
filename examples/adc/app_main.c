@@ -30,7 +30,7 @@ void on_load()
 
 void on_ready()
 {
-    set_gpio_pin_mode(LED_1, GPIO_OUTPUT);
+    gpio_setup(LED_1, GPIO_OUTPUT);
 
     run_after_delay(led_on_task, NULL, 100);
     
@@ -40,7 +40,7 @@ void on_ready()
 void led_on_task(void* args)
 {
     // Pull Up
-    set_gpio_pin_state(LED_1, 1);
+    gpio_write(LED_1, 1);
 
     run_after_delay(led_off_task, NULL, 250);
 }
@@ -48,19 +48,25 @@ void led_on_task(void* args)
 void led_off_task(void* args)
 {
     // Pull Down
-    set_gpio_pin_state(LED_1, 0);
+    gpio_write(LED_1, 0);
 
     run_after_delay(led_on_task, NULL, 750);
 }
 
 void on_adc_complete(void* args)
 {
-    ble_device_send(args, 2);
+    adc_result_t *result = (adc_result_t*)args;
+    uint8_t buffer[2];
+
+    buffer[0] = result->value >> 8;
+    buffer[1] = result->value & 0xff;
+    
+    ble_device_send(buffer, 2);
 }
 
 void adc_task(void* args)
 {
-    read_analog_input(ADC_PIN, on_adc_complete);
+    adc_measure(ADC_PIN, 10, on_adc_complete);
     
     run_after_delay(adc_task, NULL, 500);
 }
