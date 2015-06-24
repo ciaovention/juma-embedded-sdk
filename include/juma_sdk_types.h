@@ -15,6 +15,7 @@
 #ifndef _PSM_TYPES_H_
 #define _PSM_TYPES_H_
 
+#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,6 +23,9 @@
 typedef void (*function_t)(void* args);
 
 #define SERIAL_FRAME_LENGTH 32
+
+#define TICKS_1_SECOND 1024
+#define TICKS_1_MINUTE (TICKS_1_SECOND * 60)
 
 enum {
     GPIO_OUTPUT = 1,
@@ -48,6 +52,15 @@ enum {
     BLE_DEVICE_LINK_LOST,
 };
 
+// Per Pixel Operations
+enum {
+    GFX_SET_BLACK,
+    GFX_SET_WHITE,
+    GFX_INVERT,
+};
+
+#define GFX_BLACK_IS_1   0x01
+
 typedef struct _uart_config_t {
     uint32_t speed;
     uint8_t  mode;
@@ -63,5 +76,14 @@ typedef struct _light_config_t {
 typedef struct _adc_result_t {
     uint16_t value;
 } adc_result_t;
+
+typedef struct {
+	const uint8_t *font_table;
+    uint8_t space;
+	uint8_t width;
+	uint8_t height;
+	char start_char;
+	char end_char;
+} gfx_font_t;
 
 #endif //_PSM_TYPES_H_

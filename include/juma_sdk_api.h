@@ -18,28 +18,36 @@
 #include "juma_sdk_types.h"
 
 #define run_after_delay(func, args, delay)          run_at_time((func), (args), current_time() + (delay))
-
-void on_load( void );
 void on_ready(void);
-void on_lock_state_changed(uint8_t is_locked);
-void gpio_on_change(uint8_t new_state);
+void gpio_on_change(uint32_t pins_state);
+void timer_on_fired(void);
 void ble_device_on_connect(void);
 void ble_device_on_disconnect(uint8_t reason);
-void ble_device_on_message(uint8_t* data, uint32_t size);
+void ble_device_on_message(uint8_t type, uint16_t length, uint8_t* value);
 void hif_on_message(uint8_t* data, uint32_t size);
 void run_when_idle(function_t func, void* args);
 void run_at_time(function_t func, void* args, uint32_t time);
 uint32_t current_time(void);
+void timer_init(uint8_t prescalar);
+void timer_start(uint16_t value);
+void timer_stop(void);
 void gpio_setup(uint8_t pin, uint8_t mode);
 void gpio_write(uint8_t pin, uint8_t state);
 uint8_t gpio_read(uint8_t pin);
 void gpio_watch(uint8_t pin, uint8_t change_direction);
 void gpio_unwatch(uint8_t pin);
-void adc_measure(uint8_t pin, uint8_t bits, function_t on_complete);
+void adc_measure(uint8_t pin, uint8_t resolution, function_t on_complete);
+void vcc_measure(function_t on_complete);
+int8_t get_temperature(void);
 uint8_t ble_device_is_connected(void);
+void ble_device_get_id(uint8_t* id, uint8_t len);
+void ble_device_select_address(uint8_t id);
 void ble_device_set_name(const char* device_name);
+void ble_device_set_advertising_interval(uint16_t interval);
+void ble_device_start_advertising(void);
+void ble_device_stop_advertising(void);
 void ble_device_disconnect(void);
-void ble_device_send(uint8_t* data, uint32_t size);
+void ble_device_send(uint8_t type, uint32_t length, uint8_t* value);
 void hif_setup(uint8_t rx_pin, uint8_t tx_pin);
 void hif_send(uint8_t* data, uint32_t size);
 void play_sound(uint8_t pin);
@@ -47,5 +55,16 @@ void light_setup(uint8_t* pins, uint8_t is_active_high);
 void light_on(void);
 void light_off(void);
 void light_set_color(const uint8_t* rgb_values);
-void beacon_setup(uint8_t* uuid, uint16_t major, uint16_t minor, uint8_t rssi);
+void gfx_init_screen(uint8_t* buffer, uint16_t width, uint16_t height, uint8_t flags);
+void gfx_clear(void);
+void gfx_draw_pixel(uint16_t x, uint16_t y, uint8_t ppo);
+void gfx_draw_line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint8_t ppo);
+void gfx_draw_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t ppo);
+void gfx_fill_rect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t ppo);
+void gfx_draw_circle(uint16_t x, uint16_t y, uint16_t r, uint8_t ppo);
+void gfx_fill_circle(uint16_t x, uint16_t y, uint16_t r, uint8_t ppo);
+void gfx_set_font(const gfx_font_t* font);
+uint16_t gfx_draw_char(uint16_t x, uint16_t y, char c, uint8_t ppo);
+void gfx_draw_string(uint16_t x, uint16_t y, char* str, uint8_t ppo);
+void gfx_draw_image(uint16_t x, uint16_t y, const uint8_t* image, uint16_t width, uint16_t height, uint8_t ppo);
 #endif
