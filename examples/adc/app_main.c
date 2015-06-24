@@ -23,18 +23,22 @@ void led_on_task(void* args);
 void led_off_task(void* args);
 void adc_task(void* args);
 
-void on_load()
-{
-    ble_device_set_name("ADC DEMO");
-}
-
 void on_ready()
 {
+    ble_device_set_name("ADC DEMO");
     gpio_setup(LED_1, GPIO_OUTPUT);
 
     run_after_delay(led_on_task, NULL, 100);
     
     run_after_delay(adc_task, NULL, 100);
+
+    ble_device_set_advertising_interval(200);
+    ble_device_start_advertising();
+}
+
+void ble_device_on_disconnect(uint8_t reason)
+{
+    ble_device_start_advertising();
 }
 
 void led_on_task(void* args)
@@ -60,8 +64,8 @@ void on_adc_complete(void* args)
 
     buffer[0] = result->value >> 8;
     buffer[1] = result->value & 0xff;
-    
-    ble_device_send(buffer, 2);
+
+    ble_device_send(0, 2, buffer);
 }
 
 void adc_task(void* args)

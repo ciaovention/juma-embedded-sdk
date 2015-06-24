@@ -2,14 +2,8 @@
 
 #define LED_1 18
 
-
 void led_on_task(void* args);
 void led_off_task(void* args);
-
-void on_load()
-{
-  ble_device_set_name("Blink");	
-}
 
 void on_ready()
 {

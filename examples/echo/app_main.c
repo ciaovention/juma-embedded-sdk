@@ -20,16 +20,20 @@
 void led_on_task(void* args);
 void led_off_task(void* args);
 
-void on_load()
-{
-    ble_device_set_name("Anjun");
-}
-
 void on_ready()
 {
+    ble_device_set_name("Echo");
     gpio_setup(LED_1, GPIO_OUTPUT);
 
     run_after_delay(led_on_task, NULL, 100);
+
+    ble_device_set_advertising_interval(200);
+    ble_device_start_advertising();
+}
+
+void ble_device_on_disconnect(uint8_t reason)
+{
+    ble_device_start_advertising();
 }
 
 void led_on_task(void* args)
@@ -48,7 +52,7 @@ void led_off_task(void* args)
     run_after_delay(led_on_task, NULL, 750);
 }
 
-void ble_device_on_message(uint8_t* data, uint32_t size)
+void ble_device_on_message(uint8_t type, uint16_t length, uint8_t* value)
 {
-    ble_device_send(data, size);
+    ble_device_send(type, length, value);
 }
